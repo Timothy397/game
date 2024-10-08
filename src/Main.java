@@ -16,31 +16,31 @@ public class Main {
         Random random = new Random();
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Player 1: ");
+        System.out.print("Player 1: ");
         String player_one = scanner.nextLine();
-        scanner.nextLine();
 
-        System.out.println("Player 2: ");
+        System.out.print("Player 2: ");
         String player_two = scanner.nextLine();
-        scanner.nextLine();
 
-        System.out.println("Player 1: ");
+        System.out.print("Player 3: ");
         String player_three = scanner.nextLine();
-        scanner.nextLine();
 
         boolean run_again = true;
         int player_1_no_of_tries = 0;
         int player_2_no_of_tries = 0;
         int player_3_no_of_tries = 0;
+
+        int player_1_result = 0;
+        int player_2_result = 0;
+        int player_3_result = 0;
+
+
         while (run_again){
 
             player_1_no_of_tries += 1;
             player_2_no_of_tries += 1;
             player_3_no_of_tries += 1;
 
-            int player_1_result = 0;
-            int player_2_result = 0;
-            int player_3_result = 0;
 
             int player_1_dice = random.nextInt(6)+1;
             int player_2_dice = random.nextInt(6)+1;
@@ -50,26 +50,56 @@ public class Main {
             player_2.add(player_2_dice);
             player_3.add(player_3_dice);
 
-            for (int figure_1 : player_1){
-                player_1_result += figure_1;
-                }
-            for (int figure_2 : player_2){
-                player_2_result += figure_2;
+            player_1_result += player_1_dice;
+            player_2_result += player_2_dice;
+            player_3_result += player_3_dice;
+
+            System.out.println(player_one+" rolled "+ player_1_dice);
+            System.out.println(player_one +" current score is "+ player_1_result);
+
+            try {
+                Thread.sleep(500); // Sleep for 1000 milliseconds (1 second)
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-            for (int figure_3 : player_3){
-                player_3_result += figure_3;
+            System.out.println(player_two+" rolled "+ player_2_dice);
+            System.out.println(player_two +" current score is "+ player_2_result);
+            try {
+                Thread.sleep(500); // Sleep for 1000 milliseconds (1 second)
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-            if (player_1_result <= 100 || player_2_result <= 100 || player_3_result <= 100){
-                System.out.println(player_one +" current score is "+ player_1_result);
-                System.out.println(player_two +" current score is "+ player_2_result);
-                System.out.println(player_three+ " current score is "+ player_2_result);
-                System.out.println("\n");
-                run_again = true;
+            System.out.println(player_three+" rolled "+ player_3_dice);
+            System.out.println(player_three+ " current score is "+ player_3_result);
+
+            System.out.println("\n");
+
+            try {
+                Thread.sleep(1500); // Sleep for 1000 milliseconds (1 second)
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+                System.out.println(e);
             }
-            else if (player_1_result >= 100 || player_2_result >= 100 || player_3_result >= 100){;
+
+
+            if (player_1_result >= 100 || player_2_result >= 100 || player_3_result >= 100) {
                 run_again = false;
+                break;
             }
         }
-        String winner = min(player_1_no_of_tries, player_2_no_of_tries, player_3_no_of_tries);
+        int min_tries = Math.min(player_1_no_of_tries, Math.min(player_2_no_of_tries, player_3_no_of_tries));
+        String winner = "";
+
+        if (player_1_result >= 100 && player_1_no_of_tries == min_tries) {
+            winner = player_one;
+        }
+        else if (player_2_result >= 100 && player_2_no_of_tries == min_tries) {
+            winner = player_two;
+        }
+        else if (player_3_result >= 100 && player_3_no_of_tries == min_tries) {
+            winner = player_three;
+        }
+
+        System.out.println("The winner is " + winner + " with the smallest number of rolls: " + min_tries);
     }
 }
