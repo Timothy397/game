@@ -55,31 +55,17 @@ public class Main {
             player_3_result += player_3_dice;
 
             System.out.println(player_one+" rolled "+ player_1_dice);
-            System.out.println(player_one +" current score is "+ player_1_result);
-
-            try {
-                Thread.sleep(500); // Sleep for 1000 milliseconds (1 second)
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            System.out.println(player_one +"'s current score is "+ player_1_result);
+            sleeper(500);
             System.out.println(player_two+" rolled "+ player_2_dice);
-            System.out.println(player_two +" current score is "+ player_2_result);
-            try {
-                Thread.sleep(500); // Sleep for 1000 milliseconds (1 second)
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            System.out.println(player_two +"'s current score is "+ player_2_result);
+            sleeper(500);
             System.out.println(player_three+" rolled "+ player_3_dice);
-            System.out.println(player_three+ " current score is "+ player_3_result);
+            System.out.println(player_three+ "'s current score is "+ player_3_result);
 
             System.out.println("\n");
 
-            try {
-                Thread.sleep(1500); // Sleep for 1000 milliseconds (1 second)
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-                System.out.println(e);
-            }
+            sleeper(1500);
 
 
             if (player_1_result >= 100 || player_2_result >= 100 || player_3_result >= 100) {
@@ -100,6 +86,15 @@ public class Main {
             winner = player_three;
         }
 
-        System.out.println("The winner is " + winner + " with the smallest number of rolls: " + min_tries);
+        System.out.println("The winner is " + winner + " with the smallest number of throws of " + min_tries);
+    }
+
+    static void sleeper(int x){
+        try {
+            Thread.sleep(x); // Sleep for 1000 milliseconds (1 second)
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            System.out.println(e);
+        }
     }
 }
